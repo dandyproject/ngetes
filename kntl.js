@@ -6,6 +6,9 @@ const get = require('got')
 const color = require('./lib/color')
 const { liriklagu, quotemaker } = require('./lib/functions')
 const quotedd = require('./lib/quote')
+const { getZodiak } = require('./src/zodiak');
+const { ramalanCinta } = require('./src/ramalan');
+const korona = require('./src/korona');
 const { uploadImages } = require('./lib/fetcher')
 
 
@@ -141,6 +144,38 @@ async function msgHandler (client, message) {
                     }                        
                 }
             break
+               case 'korona':
+               case 'covid':
+      try {
+        client.reply(from, 'sedang memuat data...', message.id);
+        client.reply(from, await korona());
+      } catch (error) {
+        client.sendText(from, 'gagal memuat data...', message.id);
+        console.log(error.message);
+      }
+      break;
+                case 'zodiak':
+      client.reply(from, 'sedang memuat data...', message.id);
+      getZodiak(args1, args2)
+        .then((result) => {
+          client.sendText(from, result);
+        })
+        .catch((error) => {
+          client.reply(from, 'gagal memuat data...', message.id);
+          console.log(error.message);
+        });
+      break;
+    case 'love':
+      client.reply(from, 'sedang memuat data...', message.id);
+      ramalanCinta(args1, args2, args3, args4)
+        .then((result) => {
+          client.sendText(from, result);
+        })
+        .catch((error) => {
+          client.reply(from, 'gagal memuat data...', message.id);
+          console.log(error.message);
+        });
+      break;
               case 'Halo':
                         client.reply(from, `Halo *${pushname}*, Ada yang bisa saya bantu?`, message)
                     break
@@ -444,7 +479,7 @@ Season = *${resolt.docs[0].season}*
            if(!isOwner) return client.reply(from, 'Perintah ini hanya untuk Owner bot!', message.id)
                 client.reply(from, 'Succes ban anjing!', message.id)
             break
-        case 'mentionall':
+        /*case 'mentionall':
         case 'absen':
         case 'tagall':
         case 'apakah':
@@ -461,7 +496,7 @@ Season = *${resolt.docs[0].season}*
             }
             hehe += `╚═〘 Mention All by Bot 〙`
             await client.sendTextWithMentions(from, hehe)
-            break
+            break*/
         case 'kickall':
             const isGroupOwner = sender.id === chat.groupMetadata.owner
             if(!isGroupOwner) return client.reply(from, 'Perintah ini hanya bisa di gunakan oleh Owner group', message.id)
@@ -642,6 +677,26 @@ Season = *${resolt.docs[0].season}*
             q4 = Math.floor(Math.random() * 800) + 100;
             client.sendFileFromUrl(from, 'https://wallpaperaccess.com/download/anime-'+q4,'Wallpaper.png','Liat dikamera wa')
             break
+              /*case 'slap':
+              case 'tampar'
+            arg = body.trim().split(' ')
+            const person = author.replace('@c.us', '')
+            await client.sendGiphyAsSticker(from, 'https://media.giphy.com/media/S8507sBJm1598XnsgD/source.gif')
+            client.sendTextWithMentions(from, '@' + person + ' *menampar* ' + arg[1])
+            break*/
+             case 'ping':
+             case 'absen':
+            if (!isGroupMsg) return client.reply(from, 'Sorry, This command can only be used in groups', message.id)
+            if (!isGroupAdmins) return client.reply(from, 'Well, only admins can use this command', message.id)
+            const groupMem = await client.getGroupMembers(groupId)
+            let hehe = `${body.slice(6)} dari ${pushname} \n`
+            for (let i = 0; i < groupMem.length; i++) {
+                hehe += '•'
+                hehe += ` @${groupMem[i].id.replace(/@c.us/g, '')}\n`
+            }
+            hehe += '----------------------'
+            await client.sendTextWithMentions(from, hehe)
+            break
         case 'quote' :
         case 'quotes' :
           case 'Quotes':
@@ -697,6 +752,7 @@ Season = *${resolt.docs[0].season}*
 ╠➥!quotemaker |quotes|author|tema [ERROR]
 ╠➥!wallpaper
 ╠➥!info 
+╠➥!covid
 ╠➥!quotes
 ╠➥!lirik judul lagu
 ╠➥!botstat
@@ -708,9 +764,9 @@ Season = *${resolt.docs[0].season}*
 ╠✪〘 For admin group 〙✪═
 ╠➥!add 628xxxx
 ╠➥!kick <@tagmember>
+╠➥!ping <pesan>
 ╠➥!promote <@tagmember>
 ╠➥!demote <@tagadmin>s
-╠➥!absen (tag semua member)
 ╠➥!leave
 ║
 ╠✪〘 For Owner Bot) 〙✪════
