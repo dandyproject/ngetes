@@ -118,14 +118,12 @@ async function msgHandler (client, message) {
                 if (isMedia) {
                     const mediaData = await decryptMedia(message)
                     const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`
-                    await client.reply(from, `Stiker sedang dibuat ...`, message.id)
                     await client.sendImageAsSticker(from, imageBase64, message)
                     .then(() => client.reply(from, `Durasi Pembuatan: ${processTime(moment())} *Detik*`))
                     client.reply(from, 'Selesai, Follow https://instagram.com/dandisubhani_ Auto Follback Thanks:)', message.id)
                 } else if (quotedMsg && quotedMsg.type == 'image') {
                     const mediaData = await decryptMedia(quotedMsg)
                     const imageBase64 = `data:${quotedMsg.mimetype};base64,${mediaData.toString('base64')}`
-                    await client.reply(from, 'Stiker sedang dibuat ...', message.id)
                     await client.sendImageAsSticker(from, imageBase64, message)
                      .then(() => client.reply(from, `Durasi Pembuatan: ${processTime(moment())} *Detik*`))
                 } else if (args.length >= 1) {
@@ -197,7 +195,10 @@ async function msgHandler (client, message) {
             client.sendText(from, `${errAcak}`)
             break
                 case 'hi':
-            client.sendFile(from, './img/yuli.jpg', 'Tutor.jpg', `Hi *${pushname}*`, message.id)
+                  const pun = ["https://i.pinimg.com/236x/1e/ac/c6/1eacc606ec8db205d5f6b56a8a14e0a9.jpg","https://i.pinimg.com/236x/cd/51/fd/cd51fd87a17a1f879e9d6a040015a02e.jpg","https://i.pinimg.com/564x/1a/77/d1/1a77d17d317a16a1cf1598e84ff0c507.jpg","https://i.pinimg.com/236x/91/e3/78/91e3786a2822a656f0b9337c23a3b360.jpg","https://i.pinimg.com/564x/b6/2c/4a/b62c4a2f3be0f54a18ea07b95019d964.jpg","https://i.pinimg.com/236x/23/81/47/23814785b0d26e0d14b8c9eaf8302e78.jpg","https://i.pinimg.com/564x/a4/c1/4e/a4c14e7fd8b32ed0f5f290328bb8befd.jpg"]
+                  let ten = pun[Math.floor(Math.random() * pun.length)]
+            client.sendFileFromUrl(from, ten, 'pun.jpg', `Hai *${pushname}*`, message.id)
+            break
         if(isGroupMsg)
         client.sendTextWithMentions(from, `Hi juga @${message.author}`, message.id)
         break
@@ -209,7 +210,7 @@ async function msgHandler (client, message) {
             const ttsAr = require('node-gtts')('ar')
             const dataText = body.slice(8)
             if (dataText === '') return client.reply(from, 'Baka?', message.id)
-            if (dataText.length > 250) return client.reply(from, 'Teks terlalu panjang!', message.id)
+            if (dataText.length > 300) return client.reply(from, 'Teks terlalu panjang!', message.id)
             var dataBhs = body.slice(5, 7)
             if (dataBhs == 'id') {
                 ttsId.save('./tts/resId.mp3', dataText, function () {
@@ -533,6 +534,7 @@ Season = *${resolt.docs[0].season}*
             client.reply(from, 'Succes unban babi!', message.id)
             break
         case 'quotemaker':
+        case 'qmaker': "value", 
             arg = body.trim().split('|')
             if (arg.length >= 3) {
                 client.sendText(from, 'Quotes sedang dibuat ...', message.id) 
@@ -543,7 +545,7 @@ Season = *${resolt.docs[0].season}*
                 await client.reply('Quotes sedang dikirim ...', message.id )
                 client.sendFile(from, resolt, 'quotesmaker.jpg',`Quotes by ${pushname}`)
             } else {
-                client.reply(from, 'Tutor: \n!quotemaker |teks|watermark|theme\n\nEx :\n!quotemaker |dandiganteng|dandisubhani|random', message.id)
+                client.reply(from, 'Tutor: \n!qmaker |teks|watermark|\n\nEx :\n!qmaker |dandiganteng|dandisubhani|', message.id)
             }
             break
           /*case 'link':
@@ -663,6 +665,11 @@ Season = *${resolt.docs[0].season}*
             let pip = babi[Math.floor(Math.random() * babi.length)]
             client.sendFileFromUrl(from, pip, 'Babi.jpg', ':v', message.id)
             break
+            case 'pptl':
+            const pptl = ["https://i.pinimg.com/564x/b2/84/55/b2845599d303a4f8fc4f7d2a576799fa.jpg","https://i.pinimg.com/236x/98/08/1c/98081c4dffde1c89c444db4dc1912d2d.jpg","https://i.pinimg.com/236x/a7/e2/fe/a7e2fee8b0abef9d9ecc8885557a4e91.jpg","https://i.pinimg.com/236x/ee/ae/76/eeae769648dfaa18cac66f1d0be8c160.jpg","https://i.pinimg.com/236x/b2/84/55/b2845599d303a4f8fc4f7d2a576799fa.jpg","https://i.pinimg.com/564x/78/7c/49/787c4924083a9424a900e8f1f4fdf05f.jpg","https://i.pinimg.com/236x/eb/05/dc/eb05dc1c306f69dd43b7cae7cbe03d27.jpg","https://i.pinimg.com/236x/d0/1b/40/d01b40691c68b84489f938b939a13871.jpg","https://i.pinimg.com/236x/31/f3/06/31f3065fa218856d7650e84b000d98ab.jpg","https://i.pinimg.com/236x/4a/e5/06/4ae5061a5c594d3fdf193544697ba081.jpg","https://i.pinimg.com/236x/56/45/dc/5645dc4a4a60ac5b2320ce63c8233d6a.jpg","https://i.pinimg.com/236x/7f/ad/82/7fad82eec0fa64a41728c9868a608e73.jpg","https://i.pinimg.com/236x/ce/f8/aa/cef8aa0c963170540a96406b6e54991c.jpg","https://i.pinimg.com/236x/77/02/34/77023447b040aef001b971e0defc73e3.jpg","https://i.pinimg.com/236x/4a/5c/38/4a5c38d39687f76004a097011ae44c7d.jpg","https://i.pinimg.com/236x/41/72/af/4172af2053e54ec6de5e221e884ab91b.jpg","https://i.pinimg.com/236x/26/63/ef/2663ef4d4ecfc935a6a2b51364f80c2b.jpg","https://i.pinimg.com/236x/2b/cb/48/2bcb487b6d398e8030814c7a6c5a641d.jpg","https://i.pinimg.com/236x/62/da/23/62da234d941080696428e6d4deec6d73.jpg","https://i.pinimg.com/236x/d4/f3/40/d4f340e614cc4f69bf9a31036e3d03c5.jpg","https://i.pinimg.com/236x/d4/97/dd/d497dd29ca202be46111f1d9e62ffa65.jpg","https://i.pinimg.com/564x/52/35/66/523566d43058e26bf23150ac064cfdaa.jpg","https://i.pinimg.com/236x/36/e5/27/36e52782f8d10e4f97ec4dbbc97b7e67.jpg","https://i.pinimg.com/236x/02/a0/33/02a033625cb51e0c878e6df2d8d00643.jpg","https://i.pinimg.com/236x/30/9b/04/309b04d4a498addc6e4dd9d9cdfa57a9.jpg","https://i.pinimg.com/236x/9e/1d/ef/9e1def3b7ce4084b7c64693f15b8bea9.jpg","https://i.pinimg.com/236x/e1/8f/a2/e18fa21af74c28e439f1eb4c60e5858a.jpg","https://i.pinimg.com/236x/22/d9/22/22d9220de8619001fe1b27a2211d477e.jpg","https://i.pinimg.com/236x/af/ac/4d/afac4d11679184f557d9294c2270552d.jpg","https://i.pinimg.com/564x/52/be/c9/52bec924b5bdc0d761cfb1160865b5a1.jpg","https://i.pinimg.com/236x/1a/5a/3c/1a5a3cffd0d936cd4969028668530a15.jpg"]
+            let pep = pptl[Math.floor(Math.random() * pptl.length)]
+            client.sendFileFromUrl(from, pep, 'pptl.jpg', 'Penyegar Timeline Pinterest', message.id)
+            break
         case 'neko':    
         case 'kucing':      
             q2 = Math.floor(Math.random() * 900) + 300;
@@ -674,8 +681,9 @@ Season = *${resolt.docs[0].season}*
             client.sendFileFromUrl(from, 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/'+q7+'.png','Pokemon.png',)
             break
         case 'wallpaper' :
-            q4 = Math.floor(Math.random() * 800) + 100;
-            client.sendFileFromUrl(from, 'https://wallpaperaccess.com/download/anime-'+q4,'Wallpaper.png','Liat dikamera wa')
+          const wp = ["https://i.pinimg.com/236x/60/5f/bb/605fbbcded6d2f0908f219bf91026717.jpg","https://i.pinimg.com/564x/a0/21/d3/a021d3e4e5f4f40692b50c4e2d07c5e6.jpg","https://i.pinimg.com/236x/67/31/b3/6731b3bbbb6ef4114dc232698cfbd55c.jpg","https://i.pinimg.com/236x/8c/4f/56/8c4f5680ff3bd9a5f500388507b78f31.jpg","https://i.pinimg.com/236x/2a/4c/09/2a4c09a1377019cc1b05298d9b3a9d39.jpg","https://i.pinimg.com/236x/d5/14/f9/d514f998823cf23621b55d616010af6d.jpg","https://i.pinimg.com/236x/01/58/d5/0158d53314218f9d3979aaa6155c6cb5.jpg","https://i.pinimg.com/236x/0f/9d/df/0f9ddf0cb959b303a6a58bb40b2afb77.jpg","https://i.pinimg.com/236x/d9/37/20/d9372030a98fc2570df828cbb2b5db66.jpg","https://i.pinimg.com/236x/ea/2b/59/ea2b593714d275a076176d18b54a2b7a.jpg","https://i.pinimg.com/236x/28/78/ca/2878ca4bcea7b8d85031be044702b7b6.jpg","https://i.pinimg.com/236x/e2/d0/5a/e2d05a012da0bce9d49fb8efa9032997.jpg","https://i.pinimg.com/236x/c1/87/5c/c1875c4262c0e3c79c916e52336eef74.jpg","https://i.pinimg.com/236x/90/76/d2/9076d2939caf6664b7999ad4df1e8c7b.jpg","https://i.pinimg.com/236x/da/27/9e/da279e14e23447d91c60f893b30f2efe.jpg","https://i.pinimg.com/236x/7b/39/35/7b3935bcb0e21832e64c68a30838a166.jpg","https://i.pinimg.com/236x/6f/2b/e7/6f2be7f0c431965935e3ab4a11da655c.jpg","https://i.pinimg.com/236x/cc/bc/48/ccbc48b8ca0683cee844a1e0937c44f4.jpg","https://i.pinimg.com/236x/25/51/ba/2551ba15b8a463e01a1c559d43ab9c34.jpg","https://i.pinimg.com/236x/38/b5/05/38b5055dc772bc14c2c3d440845419af.jpg","https://i.pinimg.com/236x/e7/ff/ef/e7ffef8a8735f86dba1e088de197b8ec.jpg","https://i.pinimg.com/originals/39/09/f2/3909f289a451bd85efd993852fe0a02b.jpg","https://i.pinimg.com/236x/d6/42/1a/d6421a4b46e104fd4ef9a0a63efac79e.jpg","https://i.pinimg.com/236x/a7/9e/3a/a79e3aa1684a3770d7ade5e5b42f707d.jpg","https://i.pinimg.com/236x/39/dc/75/39dc75bf8e313ad1b0cf6a579d0547ab.jpg","https://i.pinimg.com/236x/e2/3b/b5/e23bb594670f9c5ac0dfabbb071354f8.jpg","https://i.pinimg.com/236x/98/1d/34/981d34c4fb2e593d684c8b31d6b63887.jpg","https://i.pinimg.com/236x/3d/a1/6d/3da16d7d6da41f5b3e14dd12d6911ece.jpg","https://i.pinimg.com/236x/db/d0/c6/dbd0c6eb2f6d3e280e07ce734c45b8b5.jpg","https://i.pinimg.com/236x/56/a2/9f/56a29f775481d0e973de89d364bb205f.jpg","https://i.pinimg.com/564x/1a/a1/e1/1aa1e122a950b624647adf5c555b9c61.jpg","https://i.pinimg.com/564x/90/d0/d1/90d0d1cf0d9e190e0a9d64c1059c0516.jpg","https://i.pinimg.com/564x/73/99/99/739999ac684e1bf3cdcf9748d8705cfc.jpg","https://i.pinimg.com/236x/e0/c4/49/e0c44919aab96d0091a850c62fb8620a.jpg"]
+            let wpp = wp[Math.floor(Math.random() * wp.length)]
+             client.sendFileFromUrl(from, wpp, 'wp.jpg', 'Random Wallpaper Pinterest', message.id)
             break
               /*case 'slap':
               case 'tampar'
@@ -694,7 +702,7 @@ Season = *${resolt.docs[0].season}*
                 hehe += '•'
                 hehe += ` @${groupMem[i].id.replace(/@c.us/g, '')}\n`
             }
-            hehe += '----------------------'
+            hehe += 'Jumlah Member : Mana Saya Tau Saya Kan Bot'
             await client.sendTextWithMentions(from, hehe)
             break
         case 'quote' :
@@ -742,41 +750,78 @@ Season = *${resolt.docs[0].season}*
             break*/
         case 'help':
         case 'menu':
-            client.reply(from, `╔═══════════════
-╠══✪〘 Hai ${pushname} 〙✪══
-╠➥!P
-╠➥!kucing
-╠➥!pokemon
-╠➥!anjing
-╠➥!tts [id,en,jp,ar] (Max 250 teks)
-╠➥!quotemaker |quotes|author|tema [ERROR]
-╠➥!wallpaper
-╠➥!info 
-╠➥!covid
-╠➥!quotes
-╠➥!lirik judul lagu
-╠➥!botstat
-║
-╠✪〘 Downloader 〙✪═
-╠➥!ytmp3 link youtube
-╠➥!ig link post
-║
-╠✪〘 For admin group 〙✪═
-╠➥!add 628xxxx
-╠➥!kick <@tagmember>
-╠➥!ping <pesan>
-╠➥!promote <@tagmember>
-╠➥!demote <@tagadmin>s
-╠➥!leave
-║
-╠✪〘 For Owner Bot) 〙✪════
-╠➥!bc pesan
-╠➥!ban <@tagmember>
-╠➥!unban <@tagmember>
-╠➥!clearall
-╠➥!leaveall
-║
-╚═〘 @dandisubhani_ 〙`, message.id)
+              client.sendFileFromUrl(from, 'https://i.ibb.co/3CpFxvb/bot.jpg', 'bot.jpg', `Hai *${pushname}*, Sebelum menggunakan bot ini silahkan membaca rules terlebih dahulu dengan ketik !rules.
+Berikut Beberapa Fitur Yang Tersedia Di Bot Ini :
+➥!menu1 = Menu Utama.
+➥!menu2 = Menu Admin Grup.
+➥!menu3 = Menu  Downloader.
+➥!menu4 = Menu Quotes.
+➥!menu5 = Menu Penyegar Timeline.
+
+Note : Semua Perintah Menggunakan Prefix !
+
+Jika Ingin Donasi ketik !donasi untuk membantu agar bot tetap aktif dan menambah fitur`, message.id)
+            break
+            case 'menu1':
+            client.reply(from, `Menu Utama:
+
+➥!p (Pembuat Sticker)
+➥!kucing 
+➥!anjing
+➥!pokemon
+➥!tts [id,en,ar,jp] teks (Maks 300 Teks)
+➥!wallpaper 
+➥!covid
+➥!lirik [judul lagu]
+➥!botstat
+
+Untuk Tutor Ketik !tutor`, message.id)
+            break
+            case 'menu2':
+            client.reply(from, `Menu Admin Grup :
+➥!add 628xxxx
+➥!kick <@tagmember>
+➥!ping <teks>
+➥!promote <@tagmember>
+➥!demote <@tagadmin>
+➥!leave`, message.id)
+            break
+            case 'menu3':
+            client.reply(from, `Menu Downloader :
+➥!ig [link post]`, message.id)
+            break
+            case 'menu4':
+            client.reply(from, `Menu Quotes :
+➥!quotes
+➥!qmaker |teks|author|`, message.id)
+            break
+            case 'menu5':
+            client.reply(from, `Menu Penyegar Timeline :
+➥!pptl`, message.id)
+            break
+            case 'tutor':
+            client.reply(from, `Tutorial :
+
+➥!p 
+Membuat Stiker Dengan Mengirim/Membalas Gambar dengan Caption !p
+
+➥!tts [id,en,ar,jp] teks
+Mengubah Teks Menjadi Suara 
+Contoh: !tts id Bot Nolep Banget
+
+➥!lirik [judul lagu]
+Mencari Lirik Lagu 
+Contoh: !lirik on my way
+
+➥!ig [link post]
+Mendownload Single Post Photo/Video Instagram
+Contoh: !ig https://www.instagram.com/p/B-Hd2gKppnN/?igshid=dccytqkzzspz
+
+➥!qmaker |teks|author
+Membuat Quotes Sederhana
+Contoh: !qmaker |Anjay Bot|Bot Nolep
+
+*Note: Perintah Tidak Menggunakan [] dan <>.`, message.id)
             break
         case 'info':
             client.sendText(from, `Hai ${pushname} Ini adalah program yang dibuat menggunakan javascript
@@ -785,6 +830,24 @@ gunakan seperlunya dan semua media yang kamu kirim tidak tersimpan di server kam
 perintah yang kamu berikan kepada bot ini bukan tanggung jawab kami
 jika ada masalah,hubungi wa.me/6289636035164
 terima kasih:)`, message.id)
+         break
+         case 'rules': 
+         client.reply(from, `Halo ${pushname}, Berikut Adalah Beberapa Rules Bot ini :
+1.Bot ON Tergantung Mood
+2.Jangan Spam Bot 
+3.Kalo Bot NoRespon Jangan Rusuh 
+4.Gunakan Bot dengan bijak
+5.Semua Perintah Yang Kamu Kirim di proses otomatis oleh sistem
+6.JANGAN TELPON BOT,KARENA AKAN KENA BLOCK otomatis
+
+Dah Itu Aja`, message.id)
+         break
+         case 'donasi':
+         client.reply(from, `Bagi Yang Mau Donasi Bisa Ke
+Dana/OVO/Gopay ke Nomor: 089636035164
+via Pulsa: 081296728103
+
+Tidak Memaksa Anda Untuk Donasi,Terima Kasih ^_^`, message.id)
          break
         default:
             console.log(color('[ERROR]', 'red'), color(time, 'yellow'), 'Unregistered Command from', color(pushname))
