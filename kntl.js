@@ -121,6 +121,7 @@ async function msgHandler (client, message) {
                     await client.sendImageAsSticker(from, imageBase64, message)
                     .then(() => client.reply(from, `Durasi Pembuatan: ${processTime(moment())} *Detik*`))
                     client.reply(from, 'Selesai, Follow https://instagram.com/dandisubhani_ Auto Follback Thanks:)', message.id)
+                    client.reply(from, 'Tulis yang ada dipikiranmu tentang bot ini di https://secreto.site/id/16154939 Diisi ya,maacih', message.id)
                 } else if (quotedMsg && quotedMsg.type == 'image') {
                     const mediaData = await decryptMedia(quotedMsg)
                     const imageBase64 = `data:${quotedMsg.mimetype};base64,${mediaData.toString('base64')}`
@@ -750,8 +751,9 @@ Season = *${resolt.docs[0].season}*
             break*/
         case 'help':
         case 'menu':
-              client.sendFileFromUrl(from, 'https://i.ibb.co/3CpFxvb/bot.jpg', 'bot.jpg', `Hai *${pushname}*, Sebelum menggunakan bot ini silahkan membaca rules terlebih dahulu dengan ketik !rules.
-Berikut Beberapa Fitur Yang Tersedia Di Bot Ini :
+         client.sendFileFromUrl(from, 'https://i.ibb.co/3CpFxvb/bot.jpg', 'bot.jpg', `Hai *${pushname}*, Sebelum menggunakan bot ini silahkan membaca rules terlebih dahulu dengan ketik !rules.
+
+ Berikut Beberapa Fitur Yang Tersedia Di Bot Ini :
 ➥!menu1 = Menu Utama.
 ➥!menu2 = Menu Admin Grup.
 ➥!menu3 = Menu  Downloader.
@@ -759,6 +761,9 @@ Berikut Beberapa Fitur Yang Tersedia Di Bot Ini :
 ➥!menu5 = Menu Penyegar Timeline.
 
 Note : Semua Perintah Menggunakan Prefix !
+Secreto: https://secreto.site/id/16154939
+
+Jika Bot Ini Delay Silahkan Ke Bot : wa.me/6283123565817
 
 Jika Ingin Donasi ketik !donasi untuk membantu agar bot tetap aktif dan menambah fitur`, message.id)
             break

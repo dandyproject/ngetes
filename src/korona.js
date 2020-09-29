@@ -11,7 +11,7 @@ module.exports = async () => {
     korona += `😊 Sembuh : ${sembuh}\n`;
     korona += `😭 Meninggal : ${meninggal}\n`;
     korona += `🤒 Dirawat : ${dirawat} \n
-    Data ini diambil dari sumber yang terpercaya.`;
+Data ini diambil dari sumber yang terpercaya.`;
     // console.log(korona);
     return korona;
   } catch (error) {
